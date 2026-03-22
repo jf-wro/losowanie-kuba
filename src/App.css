@@ -1,0 +1,279 @@
+.app-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+  touch-action: none;
+}
+
+.header {
+  padding: 1.5rem 2rem;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(to right, #a855f7, #3b82f6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  gap: 4rem;
+}
+
+.slot-section {
+  flex: 0 0 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+/* Cartoon Slot Machine Body */
+.cartoon-slot-machine {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  border-radius: 36px;
+  padding: 24px;
+  box-shadow: 
+    inset 0 10px 0 rgba(255,255,255,0.4),
+    inset 0 -10px 0 rgba(0,0,0,0.2),
+    0 20px 40px rgba(0,0,0,0.6),
+    0 10px 0 #b45309;
+  border: 6px solid #78350f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  transform: scale(1.1);
+}
+
+.machine-top {
+  display: flex;
+  gap: 15px;
+  background: #78350f;
+  padding: 10px 30px;
+  border-radius: 100px;
+  box-shadow: inset 0 3px 0 rgba(255,255,255,0.2);
+}
+
+.bulb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fde047;
+  box-shadow: 0 0 15px #fde047, inset -2px -2px 0 rgba(0,0,0,0.2);
+  animation: twinkle 1s infinite alternate;
+}
+
+.bulb:nth-child(even) {
+  background: #fbcfe8;
+  box-shadow: 0 0 15px #fbcfe8, inset -2px -2px 0 rgba(0,0,0,0.2);
+  animation-delay: 0.5s;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.6; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1.1); box-shadow: 0 0 25px currentColor; }
+}
+
+/* Wyświetlacz */
+.slot-machine-display {
+  width: 320px;
+  height: 160px;
+  background: var(--tile-bg);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  box-shadow: 
+    inset 0 10px 20px rgba(0,0,0,0.3),
+    0 5px 0 #78350f;
+  position: relative;
+  overflow: hidden;
+  border: 4px solid #451a03;
+}
+
+.slot-window {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  background: #f8fafc;
+  min-height: 0;
+}
+
+.slot-inner-shadow {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.4) 100%);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.slot-reel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
+
+.slot-item {
+  height: 152px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Pojedyncza animacja całego procesu kręcenia w dół */
+.slot-reel.phase-spinning {
+  animation: slotComplete 3s cubic-bezier(0.15, 0.85, 0.25, 1) forwards;
+}
+
+@keyframes slotComplete {
+  0% { transform: translateY(calc(-100% + 152px)); filter: blur(0); }
+  5% { filter: blur(3px); }
+  80% { filter: blur(3px); }
+  100% { transform: translateY(0); filter: blur(0); }
+}
+
+.tile-part {
+  flex: 1;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 6rem;
+  font-weight: 800;
+  letter-spacing: -2px;
+}
+
+.tile-part.right {
+  border-left: 6px solid #451a03;
+  background: #f1f5f9;
+  z-index: 10;
+  box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+}
+
+.machine-bottom {
+  margin-top: 10px;
+}
+
+.spin-btn {
+  width: 320px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.2rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  border-radius: 100px;
+  border: 4px solid #7f1d1d;
+  background: linear-gradient(to bottom, #ef4444, #b91c1c);
+  color: white;
+  cursor: pointer;
+  box-shadow: 
+    0 10px 0 #7f1d1d,
+    0 15px 20px rgba(0,0,0,0.5),
+    inset 0 5px 0 rgba(255,255,255,0.4);
+  text-shadow: 0 3px 0 rgba(0,0,0,0.3);
+  transition: all 0.1s;
+}
+
+.spin-btn:hover:not(:disabled) {
+  background: linear-gradient(to bottom, #f87171, #dc2626);
+}
+
+.spin-btn:active, .spin-btn.pressed {
+  transform: translateY(10px);
+  box-shadow: 
+    0 0 0 #7f1d1d,
+    0 5px 10px rgba(0,0,0,0.5),
+    inset 0 5px 0 rgba(0,0,0,0.2);
+  background: #b91c1c;
+}
+
+.spin-btn:disabled {
+  cursor: not-allowed;
+  filter: grayscale(1) opacity(0.5);
+}
+
+/* Lego Board (Right Side) */
+.lego-board {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 800px;
+  aspect-ratio: 1 / 1;
+  position: relative;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 40px 32px; /* siatka idealna do klockow: width 40, height 32 */
+  border-radius: 24px;
+  box-shadow: inset 0 0 50px rgba(0,0,0,0.5);
+  border: 4px solid rgba(255,255,255,0.1);
+  touch-action: none;
+}
+
+.lego-brick {
+  position: absolute;
+  height: 32px;
+  border-radius: 4px;
+  cursor: grab;
+  box-shadow: 
+    inset 0 4px 6px rgba(255,255,255,0.4),
+    inset 0 -4px 6px rgba(0,0,0,0.3),
+    0 4px 8px rgba(0,0,0,0.4);
+  border: 1px solid rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: space-around;
+  padding: 0 4px;
+}
+
+.lego-brick.is-dragging {
+  cursor: grabbing;
+  z-index: 999 !important;
+  transform: scale(1.05); /* efekt uniesienia klocka */
+  box-shadow: 
+    inset 0 4px 6px rgba(255,255,255,0.4),
+    inset 0 -4px 6px rgba(0,0,0,0.3),
+    0 15px 30px rgba(0,0,0,0.6);
+}
+
+/* Wypustki klocka Lego */
+.lego-stud {
+  width: 24px;
+  height: 8px;
+  background: inherit;
+  border-radius: 4px 4px 0 0;
+  position: relative;
+  top: -8px; /* wychodzi poza klocek w gore */
+  box-shadow: 
+    inset 0 2px 3px rgba(255,255,255,0.5),
+    inset 0 -1px 2px rgba(0,0,0,0.3);
+  border: 1px solid rgba(0,0,0,0.2);
+  border-bottom: none;
+}
